@@ -11,6 +11,32 @@
   </head>
 
   <body>
+    <% if flash[:notice] %>
+      <div class="notification is-info">
+       <p class="notice"><%= notice %></p>
+      </div>
+    <% end %>
+
+    <% if flash[:alert] %>
+      <div class="notification is-danger">
+       <p class="alert"><%= alert %></p>
+      </div>
+    <% end %>
+   <header>
+    <%= link_to image_tag("https://presite-potepancamp-rails-02.herokuapp.com/assets/logo.png"), root_path %>
+
+    <% if member_signed_in? %>
+     <%= link_to "ログアウト", destroy_member_session_path, method: :delete %>
+    <% else %>
+     <%= link_to "ログイン", new_member_session_path %>
+     <%= link_to "新規登録", new_member_registration_path %>
+    <% end %>
+   </header>
+   
     <%= yield %>
+    
+   <footer>
+    <p>© 2020 POTEPAN.INC.</p>
+   </footer>
   </body>
 </html>

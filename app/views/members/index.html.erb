@@ -1,0 +1,14 @@
+
+<h2>アカウント</h2>
+
+<% @members.each do |member| %>
+ <tr>
+  <th>メールアドレス</th>
+  <td><%= member.email %></td>
+ </tr>
+
+ <tr>
+  <th>パスワード</th>
+  <td><%= member.password %></td>
+ </tr>
+<% end %>
