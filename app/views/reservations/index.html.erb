@@ -1,6 +1,6 @@
-<h2>予約済みルーム一覧</h2>
+<h2 class="title">予約済みルーム一覧</h2>
 
-<table>
+<table class= "table">
  <thead>
   <th>ルーム画像</th>
   <th>ルーム名</th>
@@ -12,18 +12,23 @@
  </thead>
 
  <tbody>
-  <% @reservations.each do |rv| %>
+  <% @reservations.each do |reservation| %>
+  <% @rooms.each do |room| %>
    <tr>
     <td>
-     <%= image_tag rv.room.room_img_url.to_s %>
-    </td>
-    <td><%= rv.room.name, room %></td>
-    <td><%= rv.room.introduction %></td>
-    <td><%= rv.price %></td>
-    <td><%= rv.start_at.strftime("%Y年%m月%d日%H時%M分") %></td>
-    <td><%= rv.end_at.strftime("%Y年%m月%d日%H時%M分") %></td>
-    <td><%= rv.updated_at.strftime("%Y年%m月%d日%H時%M分") %></td>
+     <%= link_to room do %>
+     <%= image_tag room.room_img_url.to_s %>
+    <td>
+     <% end %>
+     
+    <td><%= link_to room.name,room %></td>
+    <td><%= room.introduction %></td>
+    <td>¥<%= reservation.sum_of_price %></td>
+    <td><%= reservation&.start_at&.strftime("%Y年%m月%d日") %></td>
+    <td><%= reservation&.end_at&.strftime("%Y年%m月%d日") %></td>
+    <td><%= reservation&.updated_at&.strftime("%Y年%m月%d日%H時%M分") %></td>
    </tr>
+  <% end %>
   <% end %>
  </tbody>
 </table>

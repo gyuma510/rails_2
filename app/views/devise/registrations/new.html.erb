@@ -1,6 +1,6 @@
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
-  <p>新しいアカウントを作成</p>
+  <h2 class="title">新しいアカウントを作成</h2>
 
   <div class="field">
     <%= f.text_field :membername, :placeholder => "ユーザー名", autofocus: true, autocomplete: "membername" %>

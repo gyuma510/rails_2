@@ -1,7 +1,20 @@
 Rails.application.routes.draw do
+  
   devise_for :members
   root to: "home#index"
-  resources :members
-  resources :rooms
+  
+  get '/members/account'
+  
+  get '/members/profile'
+  
+  resources :rooms do
+    collection do
+      get 'search'
+    end
+  end
+  
   resources :reservations
+  
+  resources :members
+
 end
