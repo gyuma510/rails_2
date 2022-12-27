@@ -17,19 +17,10 @@
    </tr>
 
    <tr>
-    <th>使用日数:</th>
-    <td><%= @reservation.sum_of_days.to_i %>日</td>
-   </tr> 
-    
-   <tr>
     <th>人数:</th>
     <td><%= @reservation.number %>人</td>
    </tr>
    
-   <tr>
-    <th>合計金額</th>
-    <td><%= @reservation.sum_of_price %>円</td>
-   </tr>
   </table>
 
    <p>上記内容でよろしければ、「予約確定」を押してください</p>
@@ -43,7 +34,7 @@
 
    <tr>
     <td>
-     <button class="button is-info">予約を確定</button><br>
+     <%= f.submit "予約を確定" %><br>
     </td>
    </tr>
   
