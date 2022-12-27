@@ -1,3 +1,20 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  
+  devise_for :members
+  root to: "home#index"
+  
+  get '/members/account'
+  
+  get '/members/profile'
+  
+  resources :rooms do
+    collection do
+      get 'search'
+    end
+  end
+  
+  resources :reservations
+  
+  resources :members
+
 end

@@ -1,16 +1,74 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Rails2</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+ <head>
+  <title>Rails2</title>
+   <meta name="viewport" content="width=device-width,initial-scale=1">
+   <%= csrf_meta_tags %>
+   <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+   <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+ </head>
 
-  <body>
+ <body>
+  <% if flash[:notice] %>
+   <div class="notification is-info">
+    <p class="notice"><%= notice %></p>
+   </div>
+  <% end %>
+
+  <% if flash[:alert] %>
+   <div class="notification is-danger">
+    <p class="alert"><%= alert %></p>
+   </div>
+  <% end %>
+   
+   <header>
+    <nav class="navbar is-dark">
+     <%= link_to image_tag("https://presite-potepancamp-rails-02.herokuapp.com/assets/logo.png"), root_path %>
+     <%= search_form_for @q, url: search_rooms_path, method: :get, local: true do |f| %>
+     <%= f.search_field :adress_cont, placeholder:"エリア" %> 
+     <% end %>
+
+     <%= search_form_for @q, url: search_rooms_path, method: :get, local: true do |f| %>
+      <%= f.search_field :name_or_introduction_or_adress_cont, placeholder:"キーワード" %> 
+     <% end %>
+   
+     <% if member_signed_in? %>
+      <%= current_member.membername %>さん
+       <nav class="navbar" role="navigation" aria-label="dropdown navigation">
+        <div class="navbar-item has-dropdown is-hoverable">
+         <a class="navbar-link is-arrowless">
+        <% if current_member.profile_image_id? %>
+         <%= image_tag current_member.profile_image_id.url %>
+        <% else %>
+         <%= image_tag ("https://presite-potepancamp-rails-02.herokuapp.com/assets/default_icon-9263fc59c414b7228d256fc178dcb22183561357950a68f5ad086ba7ee054974.jpg") %>
+        <% end %>
+         </a>
+          <div class="navbar-dropdown">
+           <%= link_to "ルーム登録",new_room_path,class: "navbar-item" %>
+           <%= link_to "予約済みルーム一覧", reservations_path,class: "navbar-item" %>
+           <%= link_to "登録済みルーム一覧", rooms_path,class: "navbar-item" %>
+           <%= link_to "設定", members_account_path,class: "navbar-item" %>
+           <%= link_to "ログアウト", destroy_member_session_path, method: :delete,class: "navbar-item" %>
+          </div>
+        </div>
+       </nav>
+     <% else %>
+      <%= link_to "ログイン", new_member_session_path,class:"button is-info" %>
+      <%= link_to "新規登録", new_member_registration_path,class:"button is-Light" %>
+     <% end %>
+    </nav>
+   </header>
+   
     <%= yield %>
+
+   <footer class= "footer">
+    <nav class="navbar is-dark">
+     <div class= "content has-text-centered">
+      <p>© 2020 POTEPAN.INC.</p>
+     </div>
+    </nav>
+   </footer>
   </body>
 </html>

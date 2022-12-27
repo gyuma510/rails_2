@@ -1,0 +1,25 @@
+<%= link_to "アカウント", members_account_path,class:"subtitle" %>
+<%= link_to "プロフィール", members_profile_path,class:"subtitle" %><br>
+
+ <h2 class= "title">プロフィール</h2>
+
+  <%= form_with model: @member do |f| %>
+   <% if @member.profile_image_id? %>
+    <%= image_tag @member.profile_image_id.url %>
+   <% else %>
+    <%= image_tag ("https://presite-potepancamp-rails-02.herokuapp.com/assets/default_icon-9263fc59c414b7228d256fc178dcb22183561357950a68f5ad086ba7ee054974.jpg") %>
+   <% end %><br>
+
+   <%= f.label :profile_image_id,"アイコン画像" %>
+   <%= f.file_field :profile_image_id %><br>
+
+   <%= f.label :membername,"名前" %>
+   <span class="tag is-danger">必須</span>
+   <%= f.text_field :membername,placeholder:"名前を入力" %><br>
+
+   <%= f.label :profile,"自己紹介" %>
+   <%= f.text_area :profile,placeholder:"自己紹介を入力" %><br>
+
+    <button class= "button is-info" >更新</button>
+
+<% end %>

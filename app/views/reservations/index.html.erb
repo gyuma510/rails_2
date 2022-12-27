@@ -1,0 +1,31 @@
+<h2 class="title">予約済みルーム一覧</h2>
+
+<table class= "table">
+ <thead>
+  <th>ルーム画像</th>
+  <th>ルーム名</th>
+  <th>ルーム紹介</th>
+  <th>合計料金</th>
+  <th>開始日</th>
+  <th>終了日</th>
+  <th>予約確定日時</th>
+ </thead>
+
+ <tbody>
+  <% @reservations.each do |reservation| %>
+   <tr>
+    <td>   
+      <%= link_to reservation.room do %>
+     <%= image_tag reservation.room.room_img_url.to_s %>
+      <% end %>
+    </td>
+    <td><%= link_to reservation.room.name,reservation.room %></td>
+    <td><%= reservation.room.introduction %></td>
+    <td>¥<%= reservation.sum_of_price %></td>
+    <td><%= reservation&.start_at&.strftime("%Y年%m月%d日") %></td>
+    <td><%= reservation&.end_at&.strftime("%Y年%m月%d日") %></td>
+    <td><%= reservation&.updated_at&.strftime("%Y年%m月%d日%H時%M分") %></td>
+   </tr>
+  <% end %>
+ </tbody>
+</table>

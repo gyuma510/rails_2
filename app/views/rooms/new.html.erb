@@ -1,0 +1,35 @@
+<h2 class= "title">ルーム情報登録</h2>
+
+<%= render "shared/error", obj: @room %>
+
+ <%= form_with model: @room do |f| %>
+  <table class= "table">
+   <tr>
+    <th><%= f.label :name ,"ルーム名" %><span class="tag is-danger">必須</span></th>
+    <td><%= f.text_field :name, :placeholder => "ルーム名を入力" %></td>
+   </tr>
+  
+   <tr>
+    <th><%= f.label :introduction ,"ルーム紹介" %><span class="tag is-danger">必須</span></th>
+    <td><%= f.text_area :introduction, :placeholder => "ルーム説明を入力" %></td>
+   </tr>
+
+   <tr>
+    <th><%= f.label :price ,"料金" %><span class="tag is-danger">必須</span></th>
+    <td><%= f.text_field :price, :placeholder => "一日あたりの料金を入力" %></td>
+   </tr>
+
+   <tr>
+    <th><%= f.label :adress ,"住所" %><span class="tag is-danger">必須</span></th>
+    <td><%= f.text_field :adress, :placeholder => "住所を入力" %></td>
+   </tr>
+
+   <tr>
+    <th><%= f.label :room_img ,"ルーム画像" %><span class="tag is-danger">必須</span></th>
+    <td><%= f.file_field :room_img %></td>
+   </tr>
+  
+  </table>
+
+   <button class="button is-info">登録</button>
+ <% end %>

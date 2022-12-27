@@ -1,0 +1,29 @@
+<h2 class="title">検索結果:<%= @results.count %>件</h2>
+ 
+ <% if @results.count > 0 %>
+  <table class= "table">
+   <thead>
+    <tr>
+     <th>ルーム画像</th>
+     <th>ルーム名</th>
+     <th>ルーム紹介</th>
+     <th>料金</th>
+    </tr>
+   </thead>
+
+   <tbody>
+    <% @results.each do |room| %>
+     <tr>
+      <td><%= image_tag room.room_img_url.to_s %></td>
+      <td><%= link_to room.name,room %></td>
+      <td><%= room.adress %></td>
+      <td>¥<%= room.price %></td>
+     </tr>
+    <% end %>
+   </tbody>
+  </table>  
+ 
+ <% else %>
+  <p>検索結果はありません</p>
+ <% end %>
+  
