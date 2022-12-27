@@ -12,6 +12,12 @@ class ReservationsController < ApplicationController
     @member = current_member
     @reservation = Reservation.new(reservation_params)
     @room = Room.find(params[:reservation][:room_id])
+    if @reservation.invalid?
+      flash.now[:alert] = "入力内容に不備があります"
+      render template: 'rooms/show'
+    else
+      flash.now[:alert] = "予約はまだ確定していません"
+    end
   end
 
   def create
@@ -21,11 +27,6 @@ class ReservationsController < ApplicationController
       if @reservation.save
         flash[:notice] = "予約が完了しました"
         redirect_to reservation_path(@reservation)
-      else
-        flash[:alert] = "予約できませんでした"
-        @reservations = Reservation.all
-        @rooms = Room.all
-        render :index
       end
   end
 

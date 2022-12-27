@@ -4,7 +4,7 @@ class Reservation < ApplicationRecord
 
   validates :start_at,presence: true
   validates :end_at,presence: true
-  validates :number,numericality: true,inclusion: {in: 1..10},presence: true
+  validates :number,presence: true,numericality: true,inclusion: {in: 1..10}
   validate :date_before_start
   validate :date_before_finish
 
